@@ -13,8 +13,8 @@ RSpec.feature "Admin visits gif new page" do
 
       visit admin_categories_gifs_path
       expect(page).to have_content("Create a New Category and Gif")
-      click_on "Add Gif"
-      expect(current_page).to eq(admin_categories_gifs) 
+      click_on "add gif and create category"
+      expect(current_page).to eq(admin_categories_gifs)
     end
   end
 

@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories
+    resources :gifs
   end
 
+  resources :categories, only: [:index, :show]
+  resources :gifs, only: [:index, :show]
 
 end
