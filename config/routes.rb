@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   namespace :admin do
-    resources :categories
-    resources :gifs
+    resources :categories do
+      resources :gifs
+    end
   end
 
   resources :categories, only: [:index, :show]

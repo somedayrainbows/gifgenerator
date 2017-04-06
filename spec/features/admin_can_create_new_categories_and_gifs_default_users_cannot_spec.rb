@@ -11,10 +11,23 @@ RSpec.feature "Admin visits gif new page" do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
-      visit admin_categories_gifs_path
+      visit new_admin_category_gif_path
       expect(page).to have_content("Create a New Category and Gif")
+      fill_in "category", with: "goats"
       click_on "add gif and create category"
-      expect(current_page).to eq(admin_categories_gifs)
+      expect(current_page).to eq(admin_category_gifs_path)
+      expect(page).to have_content("goats")
+    end
+
+    context "as default user" do
+      it "does not allow default user to add a new category and gif" do
+        user = User.create(first_name: "Helga",
+                           last_name: "Richards",
+                           email: "helga@gmail.com",
+                           password: "icecream",
+                           role: 0)
+        
+      end
     end
   end
 
