@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Successfully logged in!"
       redirect_to user_path(@user)
     else
+      flash[:error] = "There was an error logging in. Please check your email and password"
       render :new
     end
   end
