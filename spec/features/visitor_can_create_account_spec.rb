@@ -12,7 +12,7 @@ describe "User visits the new user page" do
     click_on "Create User"
     expect(current_path).to eq(user_path(User.last))
     expect(page).to have_content("You are now logged in.")
-    expect(User.last.role_id).to eq("default")
+    expect(User.last.role).to eq("default")
     expect(page).to have_content("Welcome, Jane!")
   end
 end
