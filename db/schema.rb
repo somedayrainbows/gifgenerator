@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406052329) do
+ActiveRecord::Schema.define(version: 20170407034336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,24 +34,18 @@ ActiveRecord::Schema.define(version: 20170406052329) do
     t.index ["category_id"], name: "index_gifs_on_category_id", using: :btree
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "role"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
     t.string   "password_confirmation"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "role_id"
-    t.index ["role_id"], name: "index_users_on_role_id", using: :btree
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "role",                  default: 0
   end
 
   add_foreign_key "favorites", "gifs"
   add_foreign_key "favorites", "users"
   add_foreign_key "gifs", "categories"
-  add_foreign_key "users", "roles"
 end
