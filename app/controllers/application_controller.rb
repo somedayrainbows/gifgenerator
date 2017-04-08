@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin?
   end
 
-  def authorize
-    redirect_to login_path unless current_user
-  end
+  # def authorize
+  #   redirect_to login_path unless current_user
+  # end
 
 end

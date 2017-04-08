@@ -3,12 +3,11 @@ require 'rails_helper'
 describe "User visits login page" do
   context "as admin" do
     it "they can log in" do
-      admin = User.create(first_name: "Jane",
+      admin = User.create!(first_name: "Jane",
                           last_name: "Doe",
                           email: "happy_admin@gifgenerator.com",
                           password: "ilovegifs123",
                           role: 1)
-
       visit login_path
       within("form") do
       fill_in "Email", with: "happy_admin@gifgenerator.com"
@@ -28,9 +27,7 @@ describe "User visits login page" do
       user = User.create(first_name: "Helga",
                          last_name: "Richards",
                          email: "helga@gmail.com",
-                         password: "icecream",
-                         role: 0)
-
+                         password: "icecream")
       visit login_path
       within("form") do
       fill_in "Email", with: "helga@gmail.com"
