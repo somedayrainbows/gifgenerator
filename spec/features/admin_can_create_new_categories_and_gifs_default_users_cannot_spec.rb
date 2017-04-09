@@ -16,7 +16,7 @@ describe "Admin visits the page to create a new category and gif" do
       fill_in "Name", with: "goats"
       click_on "Add category and create gif"
 
-      expect(current_page).to eq(admin_category_path)
+      expect(current_page).to eq(category_path)
       expect(Category.last.name).to eq("goats")
       # expect(page).to have_content("goats")
       expect(page).to have_content("Admin Gifs by Category")

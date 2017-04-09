@@ -1,8 +1,9 @@
 <h1>Create a New Category and Gif</h1>
 
 <div class="form">
-<%= form_for @category do |f| %>
+<%= form_for @category, url: admin_categories_path do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.submit "Add category and create gif" %>
 <% end %>
+</div>

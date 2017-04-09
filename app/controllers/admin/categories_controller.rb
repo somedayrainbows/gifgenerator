@@ -1,27 +1,30 @@
 class Admin::CategoriesController < Admin::BaseController
-  def index
-    @categories = Category.all
-  end
-
   def new
     @category = Category.new
   end
 
   def create
+    @name = params[:category][:name]
+    response = Faraday.get('http://api.giphy.com/v1/gifs/translate?s=#{category_params}&api_key=dc6zaTOxFJmzC')
+    data = JSON.parse(response.body)
     binding.pry
-    @category = Category.new(category_params)
+    url = data["data"][1]["embed_url"]
+
+    @category = Category.find_or_initialize_by(category_params)
     if @category.save
-      response = Faraday.get('http://api.giphy.com/v1/gifs/translate?s=#{category_params}&api_key=dc6zaTOxFJmzC')
-      data = JSON.parse(response.body)
-      url = data["data"][1]["embed_url"]
-
-      @gif = Category.gifs.create(url)
-
-      redirect_to category_path(@category)
+      @category.gifs.create(image_path: url)
+     redirect_to category_path(@category)
     else
       flash[:error] = "Try again!"
       render :new
     end
+  end
+
+  def destroy
+    @category = Category.find_by(params[:id])
+    @category.destroy
+    redirect_to new_admin_category_path
+
   end
 
   private
