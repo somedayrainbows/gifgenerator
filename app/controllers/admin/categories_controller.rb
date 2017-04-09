@@ -5,12 +5,13 @@ class Admin::CategoriesController < Admin::BaseController
 
   def create
     @name = params[:category][:name]
-    response = Faraday.get('http://api.giphy.com/v1/gifs/translate?s=#{category_params}&api_key=dc6zaTOxFJmzC')
+    response = Faraday.get("http://api.giphy.com/v1/gifs/translate?s=#{@name}&api_key=dc6zaTOxFJmzC")
     data = JSON.parse(response.body)
-    binding.pry
-    url = data["data"][1]["embed_url"]
+    # binding.pry
+    url = data["data"]["embed_url"]
 
     @category = Category.find_or_initialize_by(category_params)
+    
     if @category.save
       @category.gifs.create(image_path: url)
      redirect_to category_path(@category)
@@ -30,6 +31,6 @@ class Admin::CategoriesController < Admin::BaseController
   private
 
   def category_params
-    require.params(:category).permit(:name)
+    params.require(:category).permit(:name)
   end
 end

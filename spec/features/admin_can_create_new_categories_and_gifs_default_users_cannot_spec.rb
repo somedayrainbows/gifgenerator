@@ -13,13 +13,14 @@ describe "Admin visits the page to create a new category and gif" do
 
       visit new_admin_category_path
       expect(page).to have_content("Create a New Category and Gif")
-      fill_in "Name", with: "goats"
+
+      fill_in "category[name]", with: "goats"
+      # save_and_open_page
       click_on "Add category and create gif"
 
-      expect(current_page).to eq(category_path)
+      expect(current_path).to eq(category_path(Category.last))
       expect(Category.last.name).to eq("goats")
       # expect(page).to have_content("goats")
-      expect(page).to have_content("Admin Gifs by Category")
     end
 
     context "as default user" do
