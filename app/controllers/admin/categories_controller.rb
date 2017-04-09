@@ -8,9 +8,16 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def create
+    binding.pry
     @category = Category.new(category_params)
     if @category.save
-      redirect_to new_admin_category_gif_path(@category.id)
+      response = Faraday.get('http://api.giphy.com/v1/gifs/translate?s=#{category_params}&api_key=dc6zaTOxFJmzC')
+      data = JSON.parse(response.body)
+      url = data["data"][1]["embed_url"]
+
+      @gif = Category.gifs.create(url)
+
+      redirect_to category_path(@category)
     else
       flash[:error] = "Try again!"
       render :new
