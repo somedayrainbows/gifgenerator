@@ -1,3 +1,9 @@
-<h1>Welcome, <%= @user.first_name %>!</h1>
+<h1 align="center" >Welcome, <%= @user.first_name %>!</h1>
 
-<%= link_to "Log out", logout_path, method: :delete %>
+<p align="center" >
+  Your user type is <%= @user.role %>
+</p>
+
+<p align="center">
+<%= link_to "Let's see some gifs!", categories_path %>
+</p>

@@ -1,23 +1,24 @@
-<h1>Create a New Account</h1>
-<div class="form">
-  <div class="col-md-6 col-md-offset-3">
+<h1 align="center">Create a New Account</h1>
+<div align="center" class="form">
+  <div align="right" class="col-md-5 col-md-offset-3">
     <%= form_for @user do |f| %>
       <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
+      <%= f.text_field :first_name %><br>
 
       <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
+      <%= f.text_field :last_name %><br>
 
       <%= f.label :email %>
-      <%= f.email_field :email %>
+      <%= f.email_field :email %><br>
 
       <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= f.password_field :password %><br>
 
       <%= f.label :password_confirmation %>
-      <%= f.text_field :password_confirmation %>
+      <%= f.text_field :password_confirmation %><br>
 
-      <%= f.submit %>
+      <%= f.submit "Sign up", class: "btn btn-primary" %>
       <% end %>
+      <%= link_to "<< back to login page", login_path %>
   </div>
 </div>

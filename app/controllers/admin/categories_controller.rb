@@ -11,7 +11,7 @@ class Admin::CategoriesController < Admin::BaseController
     url = data["data"]["embed_url"]
 
     @category = Category.find_or_initialize_by(category_params)
-    
+
     if @category.save
       @category.gifs.create(image_path: url)
      redirect_to category_path(@category)
@@ -22,10 +22,10 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def destroy
-    @category = Category.find_by(params[:id])
+    @category = Category.find(params[:id])
     @category.destroy
-    redirect_to new_admin_category_path
-
+    redirect_to categories_path
+    flash[:success] = "Category deleted successfully."
   end
 
   private

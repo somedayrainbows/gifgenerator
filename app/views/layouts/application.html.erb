@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gifgenerator</title>
+    <title>Gif Generator</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="">
+
+   <title>Stylish Portfolio - Start Bootstrap Theme</title>
+
+   <!-- Bootstrap Core CSS -->
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+
+   <!-- Custom CSS -->
+   <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+   <!-- Custom Fonts -->
+   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+       <![endif]-->
+
   </head>
 
-  <body>
-    <% if @current_user %>
-      Signed in as <%= @current_user.first_name %> | <%= link_to "Log out", logout_path %>
-      <% else %>
-      <%= link_to "Log in", login_path %>
-      <% end %>
+  <body background="https://s-media-cache-ak0.pinimg.com/originals/72/b0/43/72b04323ecf168b0e66d85c384b156fd.gif"; background-repeat: no-repeat;>
+    <div align="center" class="nav">
+      <!-- <%#= link_to "Log in", login_path unless session[:user_id] || current_page?(login_path) %> -->
+      <%= link_to "Log out", logout_path, method: :delete if session[:user_id] %>
+      <%= link_to "| User profile", user_path(current_user) if session[:user_id] %>
+      <%= link_to "| Add new category", new_admin_category_path if session[:user_id] && current_user.admin? %>
+      <%= link_to "| All gifs", categories_path unless current_page?(categories_path) if session[:user_id] %>
 
     <% flash.each do |type, message| %>
       <%= content_tag :div, message, class: "flash_#{type}" %>
     <% end %>
+  </div>
 
     <%= yield %>
 
